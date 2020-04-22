@@ -65,7 +65,11 @@ var UIController = (function() {
       return {
         type: document.querySelector(DOMstrings.inputType).value,
         description: document.querySelector(DOMstrings.inputDescription).value,
+<<<<<<< HEAD
+        value: parseFloat(document.querySelector(DOMstrings.inputValue).value)
+=======
         value: document.querySelector(DOMstrings.inputValue).value
+>>>>>>> 53a8458d0aecca8830e3a434027430e63e873bca
       };
     },
 
@@ -124,13 +128,25 @@ var controller = (function(budgetCtrl, UICtrl) {
     });
   };
 
+<<<<<<< HEAD
+  var updateBudget = function() {};
+
+=======
+>>>>>>> 53a8458d0aecca8830e3a434027430e63e873bca
   var ctrlAddItem = function() {
     var input, newItem;
 
     input = UICtrl.getinput();
-    newItem = budgetCtrl.addItem(input.type, input.description, input.value);
-    UICtrl.addListItem(newItem, input.type);
-    UICtrl.clearFields();
+
+    if (input.description !== "" && !isNaN(input.value) && input.value > 0) {
+      newItem = budgetCtrl.addItem(input.type, input.description, input.value);
+
+      UICtrl.addListItem(newItem, input.type);
+
+      UICtrl.clearFields();
+
+      updateBudget();
+    }
   };
 
   return {
