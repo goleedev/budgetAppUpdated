@@ -438,3 +438,58 @@ var controller = (function (budgetCtrl, UICtrl) {
 
 
 controller.init();
+
+
+// Caculator
+var btns = document.getElementsByClassName('active');
+var text = '';
+var screen = document.getElementById('screen');
+var equal = document.getElementById('equal');
+console.log(equal);
+var c = document.getElementById('c');
+
+for(var i = 0; i < btns.length; i++) {
+    btns[i].addEventListener('click', calculator);
+}
+equal.addEventListener('click', equal_func);
+c.addEventListener('click', del_last);
+
+function calculator() {
+    if(this.innerHTML === 'X') {
+        text+= '*';
+    } else if(this.innerHTML === "%") {
+        text+= '/';   
+    } else {
+        text += this.innerHTML;
+    }
+    screen.innerHTML = text;
+}
+
+function equal_func() {
+    screen.innerHTML = eval(text);
+    text = '';
+}
+
+function del_last() {
+    text = text.split('');
+    text.pop();
+    text = text.join('');
+    console.log(text);
+    screen.innerHTML = text;
+}
+
+// Calculator hide and show
+let show_hide_btn = document.getElementById("show");
+let target_btn = document.querySelector("#calc");
+
+let target = document.getElementById("calc")
+
+show_hide_btn.addEventListener("click", () => {
+  if(document.querySelector('#calc').style.display === "none") {
+    document.querySelector('#calc').style.display = "block";
+    show_hide_btn.innerHTML = "Done!";
+  } else {
+    document.querySelector('#calc').style.display = "none";
+    show_hide_btn.innerHTML = "Calculate!";
+  }
+});
